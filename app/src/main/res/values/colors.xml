@@ -5,4 +5,8 @@
     <color name="colorAccent">#00BFFF</color>
     <color name="colorPrimaryLight">#B0C4DE</color>
     <color name="colorBackgroundLight">#DCE6E6</color>
+
+    <color name="answer_waiting">#000000</color>
+    <color name="answer_correct">#008000</color>
+    <color name="answer_wrong">#800000</color>
 </resources>

@@ -25,7 +25,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements DataProvider.DataUpdateListener {
 
-    private List<WordModel> mWordBase = new ArrayList<>();
+    public List<WordModel> mWordBase = new ArrayList<>();
 
 
     @Override
