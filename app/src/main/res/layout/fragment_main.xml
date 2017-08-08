@@ -17,7 +17,7 @@
             android:layout_width="@dimen/main_btn_height"
             android:layout_height="match_parent"
             android:scaleType="center"
-            app:srcCompat="@mipmap/cram_2" />
+            app:srcCompat="@drawable/cram_2" />
 
         <TextView
             android:layout_width="match_parent"
@@ -44,7 +44,7 @@
             android:layout_width="@dimen/main_btn_height"
             android:layout_height="match_parent"
             android:scaleType="center"
-            app:srcCompat="@mipmap/dictionary_edit" />
+            app:srcCompat="@drawable/dictionary_edit" />
 
         <TextView
             android:layout_width="match_parent"
@@ -71,7 +71,7 @@
             android:layout_width="@dimen/main_btn_height"
             android:layout_height="match_parent"
             android:scaleType="center"
-            app:srcCompat="@mipmap/settings" />
+            app:srcCompat="@drawable/settings" />
 
         <TextView
             android:id="@+id/textView"

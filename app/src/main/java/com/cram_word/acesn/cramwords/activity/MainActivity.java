@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements DataProvider.Data
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(v-> {
 
-            Snackbar.make(v, "It's all right", Snackbar.LENGTH_LONG)
+            Snackbar.make(v, "under constraction", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
             /*
             String[] training = {"Maintain", "Support"};
@@ -95,18 +95,6 @@ public class MainActivity extends AppCompatActivity implements DataProvider.Data
             mWordBase.addAll(wordBase);
         }
 
-        // forTest
-        if(mWordBase.size() == 0) {
-            String[] training = {"Maintain", "Support"};
-            WordModel word = new WordModel("Поддержка", training, "general");
-            String[] training2 = {"Help"};
-            WordModel word2 = new WordModel("Помощ", training2, "general");
-            //List<WordModel> wordBase = new ArrayList<WordModel>();
-            mWordBase.add(word);
-            mWordBase.add(word2);
-
-            provider.storeWordBase(mWordBase);
-        }
 
     }
 

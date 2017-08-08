@@ -1,111 +1,138 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     >
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Изучаемое слово"
-        android:textSize="20sp"
-        android:gravity="center"
-        />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTargetWord"
-        android:textSize="20sp"
-        android:imeOptions="actionNext"
-        android:maxLines="1"
-        android:minLines="1"/>
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/containerButton">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Перевод вариант 1"
-        android:textSize="20sp"
-        android:gravity="center"
-        />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editForeignWord1"
-        android:textSize="20sp"
-        android:imeOptions="actionNext"
-        android:maxLines="1"
-        android:minLines="1"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Перевод вариант 2"
-        android:textSize="20sp"
-        android:gravity="center"
-        />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editForeignWord2"
-        android:textSize="20sp"
-        android:imeOptions="actionNext"
-        android:maxLines="1"
-        android:minLines="1"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
 
 
-    <TextView
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Изучаемое слово:"
+                android:textSize="20sp"
+                android:paddingTop="10dp"
+                android:gravity="center_vertical"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTargetWord"
+                android:inputType="textCapWords|textNoSuggestions"
+                android:imeOptions="actionNext"
+                style="@style/edit_field_style"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Перевод вариант 1:"
+                android:textSize="20sp"
+                android:paddingTop="10dp"
+                android:gravity="center_vertical"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editForeignWord1"
+                style="@style/edit_field_style"
+                android:inputType="textCapWords|textNoSuggestions"
+                android:imeOptions="actionNext"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Перевод вариант 2:"
+                android:textSize="20sp"
+                android:paddingTop="10dp"
+                android:gravity="center_vertical"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editForeignWord2"
+                style="@style/edit_field_style"
+                android:inputType="textCapWords|textNoSuggestions"
+                android:imeOptions="actionNext"
+                />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Перевод вариант 3:"
+                android:textSize="20sp"
+                android:paddingTop="10dp"
+                android:gravity="center_vertical"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editForeignWord3"
+                style="@style/edit_field_style"
+                android:inputType="textCapWords|textNoSuggestions"
+                android:imeOptions="actionNext"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Тема:"
+                android:textSize="20sp"
+                android:paddingTop="10dp"
+                android:gravity="center_vertical"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTheme"
+                android:text="general"
+                style="@style/edit_field_style"
+                android:inputType="textCapWords|textNoSuggestions"
+                android:imeOptions="actionDone"
+                />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Перевод вариант 3"
-        android:textSize="20sp"
-        android:gravity="center"
-        />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editForeignWord3"
-        android:textSize="20sp"
-        android:imeOptions="actionNext"
-        android:maxLines="1"
-        android:minLines="1"/>
+        android:id="@+id/containerButton"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        >
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/btnDone"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/holo_blue_dark"
+            android:textColor="@android:color/white"
+            android:text="Готово"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Тема"
-        android:textSize="20sp"
-        android:gravity="center"
-        />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTheme"
-        android:text="general"
-        android:textSize="20sp"
-        android:imeOptions="actionNext"
-        android:maxLines="1"
-        android:minLines="1"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/btnDone"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@android:color/holo_blue_dark"
-        android:textColor="@android:color/white"
-        android:text="Добавить"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/btnCancel"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@android:color/holo_red_dark"
-        android:textColor="@android:color/white"
-        android:text="Отменить"/>
-
-</LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/btnCancel"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/holo_red_dark"
+            android:textColor="@android:color/white"
+            android:text="Отменить"/>
+    </LinearLayout>
+</RelativeLayout>
