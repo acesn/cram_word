@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">CramWords</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- main fragment title -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btn_cram_title">Начать зубрить слова</string>
+    <string name="btn_edit_title">Редактировать словарь</string>
+    <string name="btn_settings_title">Настройки</string>
+
+</resources>
