@@ -80,10 +80,15 @@ public class DataProvider {
 
     public List<WordModel> addWord (WordModel word) {
 
-        for(WordModel base: mWordBase) {
-            if(base.mTargetWord.equals(word.mTargetWord)) {
-                return mWordBase;
+        if(mWordBase != null) {
+            for (WordModel base : mWordBase) {
+                if (base.mTargetWord.equals(word.mTargetWord)) {
+                    return mWordBase;
+                }
             }
+        }
+        else {
+            mWordBase = new ArrayList<>();
         }
         mWordBase.add(word);
         storeWordBase(mWordBase);
