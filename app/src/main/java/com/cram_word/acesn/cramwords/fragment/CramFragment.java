@@ -1,10 +1,7 @@
 package com.cram_word.acesn.cramwords.fragment;
 
 import android.app.Activity;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +17,7 @@ import com.cram_word.acesn.cramwords.model.WordModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 /**
@@ -32,12 +30,16 @@ import java.util.List;
 public class CramFragment extends Fragment {
 
     private TextView tvTargetWord;
+    private TextView tvForeignTitle;
     private EditText etForeignWord;
-    private Button btnCheck;
-    private Button btnNext;
+    private Button btnDone;
+    private Button btnHelp;
+    private Button btnHint;
 
     private int mCurrentWord;
     private List<WordModel> mWordBase = new ArrayList<>();
+    private List<String> mAnswers = new ArrayList<>();
+    private int mAnswerNumber;
 
     private RelativeLayout mView;
 
@@ -74,16 +76,19 @@ public class CramFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_cram, container, false);
         mView = (RelativeLayout)view;
         tvTargetWord = (TextView) view.findViewById(R.id.tvTargetWord);
+        tvForeignTitle = (TextView) view.findViewById(R.id.tvForeignTitle);
         etForeignWord = (EditText) view.findViewById(R.id.editForeignWord1);
 
-        btnCheck = (Button) view.findViewById(R.id.btnDone);
-        btnNext = (Button) view.findViewById(R.id.btnNext);
+        btnDone = (Button) view.findViewById(R.id.btnDone);
+        btnHelp = (Button) view.findViewById(R.id.btnHelp);
+        btnHint = (Button) view.findViewById(R.id.btnHint);
 
         Activity activity = getActivity();
         if(activity instanceof MainActivity) {
             setWordBase(((MainActivity) activity).mWordBase);
         }
 
+        nextWordIndex();
         fillField();
         setOnClick();
 
@@ -93,15 +98,41 @@ public class CramFragment extends Fragment {
     public void setWordBase(List<WordModel> wordBase) {
         mWordBase = wordBase;
         mCurrentWord = 0;
-
+        nextWordIndex();
         fillField();
     }
 
     private void setOnClick() {
 
-        btnCheck.setOnClickListener(v -> {
+        btnDone.setOnClickListener(v -> {
             String checkText = etForeignWord.getText().toString();
             WordModel word = mWordBase.get(mCurrentWord);
+
+            int index = 0;
+            for (String target: mAnswers) {
+                if(checkText.toLowerCase().equals(target.toLowerCase())) {
+
+                    etForeignWord.setTextColor(getResources().getColor(R.color.answer_waiting));
+                    mAnswers.remove(index);
+                    if(mAnswers.size() > 0)
+                    {
+                        mAnswerNumber++;
+                        tvForeignTitle.setText("Перевод вариант " + Integer.toString(mAnswerNumber + 1));
+                        etForeignWord.setText("");
+                        etForeignWord.setHint("");
+                    }
+                    else {
+                        nextWordIndex();
+
+                        fillField();
+                    }
+
+                    return;
+                }
+                index++;
+            }
+            etForeignWord.setTextColor(getResources().getColor(R.color.answer_wrong));
+            /*
             for (WordModel.TrainingWord target: word.mTrainingWord) {
                 if(checkText.toLowerCase().equals(target.mWord.toLowerCase())) {
                     etForeignWord.setTextColor(getResources().getColor(R.color.answer_correct));
@@ -110,8 +141,10 @@ public class CramFragment extends Fragment {
             }
 
             etForeignWord.setTextColor(getResources().getColor(R.color.answer_wrong));
+            */
         });
 
+        /*
         btnNext.setOnClickListener(v -> {
             mCurrentWord++;
             if(mCurrentWord >= mWordBase.size()) {
@@ -120,7 +153,18 @@ public class CramFragment extends Fragment {
 
             fillField();
         });
+*/
+        btnHint.setOnClickListener(v-> {
+            etForeignWord.setText("");
+            String hint = mAnswers.get(0);
+            hint = hint.substring(0, 1);
+            etForeignWord.setHint(hint);
+        });
 
+        btnHelp.setOnClickListener(v-> {
+            etForeignWord.setText("");
+            etForeignWord.setHint(mAnswers.get(0));
+        });
     }
 
     private void fillField() {
@@ -128,11 +172,43 @@ public class CramFragment extends Fragment {
             WordModel word = mWordBase.get(mCurrentWord);
             tvTargetWord.setText(word.mTargetWord);
             etForeignWord.setText("");
+            etForeignWord.setHint("");
             etForeignWord.setTextColor(getResources().getColor(R.color.answer_waiting));
+
+            mAnswerNumber = 0;
+            tvForeignTitle.setText("Перевод вариант " + Integer.toString(mAnswerNumber + 1));
+
+            // fill answers
+            mAnswers.clear();
+            for (WordModel.TrainingWord training: word.mTrainingWord) {
+                if(!training.mWord.equals("")) {
+                    mAnswers.add(training.mWord.toLowerCase());
+                }
+            }
         }
         else {
             //Snackbar.make(mView, "Нет слов в базе", Snackbar.LENGTH_LONG)
             //        .setAction("Action", null).show();
+        }
+    }
+
+    private void nextWordIndex() {
+
+        // random order
+        Random r = new Random();
+        int index = mCurrentWord;
+        do {
+            index = r.nextInt(mWordBase.size());
+        }
+        while(index == mCurrentWord);
+
+        mCurrentWord = index;
+/*
+        // line order
+        mCurrentWord++;
+        */
+        if(mCurrentWord >= mWordBase.size()) {
+            mCurrentWord = 0;
         }
     }
 

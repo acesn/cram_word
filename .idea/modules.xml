@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/CramWord.iml" filepath="$PROJECT_DIR$/CramWord.iml" />
       <module fileurl="file://$PROJECT_DIR$/CramWords.iml" filepath="$PROJECT_DIR$/CramWords.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/cram_word.iml" filepath="$PROJECT_DIR$/cram_word.iml" />

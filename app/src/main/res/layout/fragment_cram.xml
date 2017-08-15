@@ -6,8 +6,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/contText"
         android:layout_alignParentTop="true"
-        android:layout_above="@+id/containerButton">
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,6 +35,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/tvForeignTitle"
                 android:text="Перевод вариант 1:"
                 android:textSize="20sp"
                 android:paddingTop="10dp"
@@ -56,30 +58,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/containerButton"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_below="@+id/contText"
         >
+
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:id="@+id/btnDone"
+            android:id="@+id/btnHelp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/holo_orange_dark"
+            android:textColor="@android:color/white"
+            android:layout_weight="1"
+            android:text="Помощь"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/btnHint"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:background="@android:color/holo_blue_dark"
             android:textColor="@android:color/white"
-            android:text="Проверить"/>
+            android:layout_weight="1"
+            android:text="Подсказка"/>
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:id="@+id/btnNext"
+            android:id="@+id/btnDone"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:background="@android:color/holo_green_dark"
             android:textColor="@android:color/white"
-            android:text="Следующее"/>
+            android:layout_weight="1"
+            android:text="Готово"/>
     </LinearLayout>
 </RelativeLayout>
