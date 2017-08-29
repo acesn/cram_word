@@ -111,6 +111,7 @@
         android:id="@+id/containerButton"
         android:orientation="vertical"
         android:layout_alignParentBottom="true"
+        android:visibility="gone"
         >
         <Button
             android:layout_width="match_parent"

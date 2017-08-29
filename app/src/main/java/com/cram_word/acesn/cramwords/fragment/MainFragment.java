@@ -1,22 +1,30 @@
 package com.cram_word.acesn.cramwords.fragment;
 
+import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.cram_word.acesn.cramwords.R;
+import com.cram_word.acesn.cramwords.activity.ActivityAction;
+import com.cram_word.acesn.cramwords.activity.MainActivity;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class MainFragment extends Fragment {
 
+    private Toolbar mToolbar;
+    private ActivityAction mParent;
+
     public MainFragment() {
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,27 +35,32 @@ public class MainFragment extends Fragment {
         View btnEdit = view.findViewById(R.id.btnEdit);
         View btnSettings = view.findViewById(R.id.btnSettings);
 
+        Activity toolHolder = getActivity();
+        if(toolHolder instanceof ActivityAction) {
+            Toolbar toolbar = ((ActivityAction) toolHolder).getToolbar();
+            toolbar.setNavigationIcon(R.drawable.toolbar_exit);
+        }
+
+        //Activity activity = getActivity();
+        // config toolbar
+        if(toolHolder instanceof ActivityAction) {
+            ((ActivityAction)toolHolder).setToolbarButton(ActivityAction.BUTTON_NONE);
+        }
+
         btnCram.setOnClickListener(v -> {
 
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            Fragment fragment = new CramFragment();
-            //transaction.add(R.id.fragmentContainer, fragment, "Главная");
-            transaction.replace(R.id.fragmentContainer, fragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
-
+            Activity activity = getActivity();
+            if(activity instanceof ActivityAction) {
+                ((ActivityAction) activity).setFragment(ActivityAction.FRAGMENT_CRAM);
+            }
         });
 
         btnEdit.setOnClickListener(v -> {
 
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            Fragment fragment = new EditWordFragment();
-            transaction.replace(R.id.fragmentContainer, fragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
-
+            Activity activity = getActivity();
+            if(activity instanceof ActivityAction) {
+                ((ActivityAction) activity).setFragment(ActivityAction.FRAGMENT_EDIT);
+            }
         });
 
 

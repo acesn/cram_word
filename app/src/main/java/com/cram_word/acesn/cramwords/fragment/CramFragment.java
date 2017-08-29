@@ -3,6 +3,8 @@ package com.cram_word.acesn.cramwords.fragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cram_word.acesn.cramwords.R;
+import com.cram_word.acesn.cramwords.activity.ActivityAction;
 import com.cram_word.acesn.cramwords.activity.MainActivity;
 import com.cram_word.acesn.cramwords.model.WordModel;
 
@@ -27,7 +30,7 @@ import java.util.Random;
  * Use the {@link CramFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CramFragment extends Fragment {
+public class CramFragment extends Fragment implements MainActivity.FragmentInteraction {
 
     private TextView tvTargetWord;
     private TextView tvForeignTitle;
@@ -42,6 +45,7 @@ public class CramFragment extends Fragment {
     private int mAnswerNumber;
 
     private RelativeLayout mView;
+
 
     public CramFragment() {
         // Required empty public constructor
@@ -78,6 +82,7 @@ public class CramFragment extends Fragment {
         tvTargetWord = (TextView) view.findViewById(R.id.tvTargetWord);
         tvForeignTitle = (TextView) view.findViewById(R.id.tvForeignTitle);
         etForeignWord = (EditText) view.findViewById(R.id.editForeignWord1);
+        etForeignWord.setInputType(InputType.TYPE_CLASS_TEXT);
 
         btnDone = (Button) view.findViewById(R.id.btnDone);
         btnHelp = (Button) view.findViewById(R.id.btnHelp);
@@ -86,6 +91,11 @@ public class CramFragment extends Fragment {
         Activity activity = getActivity();
         if(activity instanceof MainActivity) {
             setWordBase(((MainActivity) activity).mWordBase);
+        }
+
+        // config toolbar
+        if(activity instanceof ActivityAction) {
+            ((ActivityAction)activity).setToolbarButton(ActivityAction.BUTTON_DONE | ActivityAction.BUTTON_HELP);
         }
 
         nextWordIndex();
@@ -210,6 +220,53 @@ public class CramFragment extends Fragment {
         if(mCurrentWord >= mWordBase.size()) {
             mCurrentWord = 0;
         }
+    }
+
+    @Override
+    public Boolean onButtonPressed(int button) {
+        switch (button) {
+            case BUTTON_DONE:{
+
+                String checkText = etForeignWord.getText().toString();
+                WordModel word = mWordBase.get(mCurrentWord);
+
+                int index = 0;
+                for (String target: mAnswers) {
+                    if(checkText.toLowerCase().equals(target.toLowerCase())) {
+
+                        etForeignWord.setTextColor(getResources().getColor(R.color.answer_waiting));
+                        mAnswers.remove(index);
+                        if(mAnswers.size() > 0)
+                        {
+                            mAnswerNumber++;
+                            tvForeignTitle.setText("Перевод вариант " + Integer.toString(mAnswerNumber + 1));
+                            etForeignWord.setText("");
+                            etForeignWord.setHint("");
+                        }
+                        else {
+                            nextWordIndex();
+
+                            fillField();
+                        }
+
+                        return true;
+                    }
+                    index++;
+                }
+                etForeignWord.setTextColor(getResources().getColor(R.color.answer_wrong));
+
+                return true;
+            }
+
+            case BUTTON_HELP: {
+
+                etForeignWord.setText("");
+                etForeignWord.setHint(mAnswers.get(0));
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

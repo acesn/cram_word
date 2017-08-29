@@ -60,6 +60,7 @@
         android:id="@+id/containerButton"
         android:orientation="horizontal"
         android:layout_below="@+id/contText"
+        android:visibility="gone"
         >
 
         <Button
